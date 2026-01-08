@@ -82,8 +82,8 @@ MODEL_PATH = BASE_DIR / "models/logistic_model.pkl"
 SCALER_PATH = BASE_DIR / "models/scaler.pkl" 
 RANDOM_FOREST_PATH = BASE_DIR / "models/random_forest_model.pkl" 
 joblib.dump(model, MODEL_PATH)
-joblib.dump(model, SCALER_PATH)
-joblib.dump(model, RANDOM_FOREST_PATH)
+joblib.dump(scaler, SCALER_PATH)
+joblib.dump(rf_model, RANDOM_FOREST_PATH)
 
 
 # run the command in CLI 'python src/train_model.py' to train and save the models
