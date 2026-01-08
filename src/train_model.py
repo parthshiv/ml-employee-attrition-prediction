@@ -1,6 +1,7 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression # its a "Probability Machine."
+from sklearn.ensemble import RandomForestClassifier #Advanced classifier than LogisticRegression
 from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import StandardScaler #Imports scaling tool, Normalize numeric features
 import joblib
@@ -25,6 +26,8 @@ test_size=0.2: means you are using 80% of your data. You take 80% of your data a
 
 random_state=42: This is just a seed number. It ensures that every time you run the code, you get the same random split, making your results consistent. Why 42? its a comminty standard but we can use any number to get the results consitency, if we don't use a random_state, then result will shuffle, like first time we get 85% accuracy, next time it can be 88% or 82.5% etc. so always use any number.
 """
+
+################ Logistic Regression with scaling #################
 
 # ****** Feature Scaling: **********
 
@@ -64,11 +67,23 @@ accuracy = accuracy_score(y_test, predections) # now will use scaled data for pr
 
 print(f"Model Accuracy: {accuracy}")
 
-# save Model and Scaler both
-MODEL_PATH = BASE_DIR / "models/attrition_model.pkl" 
+
+################ Random Forest(no need of scaling because its an advance library) #################
+
+rf_model = RandomForestClassifier(random_state=42)
+rf_model.fit(X_train, y_train)
+rf_preds = rf_model.predict(X_test)
+rf_acc = accuracy_score(y_test, rf_preds)
+
+print("Random Forest Accuracy:", rf_acc)
+
+# save Model and Scaler and Random Forest
+MODEL_PATH = BASE_DIR / "models/logistic_model.pkl" 
 SCALER_PATH = BASE_DIR / "models/scaler.pkl" 
+RANDOM_FOREST_PATH = BASE_DIR / "models/random_forest_model.pkl" 
 joblib.dump(model, MODEL_PATH)
 joblib.dump(model, SCALER_PATH)
+joblib.dump(model, RANDOM_FOREST_PATH)
 
 
 # run the command in CLI 'python src/train_model.py' to train the model
