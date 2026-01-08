@@ -16,6 +16,6 @@ def load_employee_data():
 if __name__ == "__main__":
     data = load_employee_data()    
     print(data.head())
-    print(data.info())
-    print(data.describe())
-    print(data['salary'].value_counts())
+    # print(data.info())
+    # print(data.describe())
+    # print(data['salary'].value_counts())
