@@ -86,4 +86,4 @@ joblib.dump(model, SCALER_PATH)
 joblib.dump(model, RANDOM_FOREST_PATH)
 
 
-# run the command in CLI 'python src/train_model.py' to train the model
+# run the command in CLI 'python src/train_model.py' to train and save the models
