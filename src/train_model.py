@@ -5,6 +5,7 @@ from sklearn.ensemble import RandomForestClassifier #Advanced classifier than Lo
 from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import StandardScaler #Imports scaling tool, Normalize numeric features
 from sklearn.pipeline import Pipeline # Combines steps, Production safety
+from sklearn.metrics import confusion_matrix, classification_report
 import joblib
 from pathlib import Path
 
@@ -97,6 +98,13 @@ pipeline = Pipeline([
 
 pipeline.fit(X_train, y_train) #Scales data, Trains model, One call only
 predections = pipeline.predict(X_test) # Auto-scales
+
+cm = confusion_matrix(y_test, predections)
+cr = classification_report(y_test, predections)
+
+print("Confusion Matrix:\n", cm)
+print("\nClassification Report:", cr)
+
 accuracy = accuracy_score(y_test, predections)
 
 print("Logistic Pipeline Accuracy:", accuracy)
@@ -123,7 +131,7 @@ RANDOM_FOREST_PATH = BASE_DIR / "models/random_forest_model.pkl"
 # joblib.dump(model, MODEL_PATH)
 # joblib.dump(scaler, SCALER_PATH)
 
-joblib.dump(scaler, PIPELINE_PATH)
+joblib.dump(pipeline, PIPELINE_PATH) #dum pipeline itself
 joblib.dump(rf_model, RANDOM_FOREST_PATH)
 
 
