@@ -10,13 +10,10 @@ SCALER_PATH = BASE_DIR / "models/scaler.pkl"
 model = joblib.load(MODEL_PATH)
 scaler = joblib.load(SCALER_PATH)
 
-new_employee = np.array([[35, 60000, 6, 3]])
+new_employee = np.array([[35, 60000, 0, 3]])
 
 new_employee_scaled = scaler.transform(new_employee)
 prediction = model.predict(new_employee_scaled)
-
-print("Model type:", type(model))
-print("Scaler type:", type(scaler))
 
 if prediction[0] == 1:
     print("Employee is likely to leave")
